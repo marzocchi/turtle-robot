@@ -35,6 +35,7 @@ Potentiometer speedPot(SPEED_POT_PIN);
 
 int lastPrintTime;
 bool obstructed;
+// we always get a stray click right after setup, so we ignore it.
 bool ignoredFirstToggleClick = false;
 
 
@@ -55,9 +56,13 @@ void onToggleButtonClick(Button &button) {
         ignoredFirstToggleClick = true;
         return;
     }
-    Serial.print("click at ");
-    Serial.println(millis()); 
     turtle.toggle();
+
+    if (turtle.isEnabled()) {
+        Timer1.attachInterrupt(onEachSecond);
+    } else {
+        Timer1.detachInterrupt();
+    }
 }
 
 void onObstacleSensorStateChange(ObstacleSensor &sensor) {
@@ -69,9 +74,20 @@ void onObstacleSensorStateChange(ObstacleSensor &sensor) {
     } else {
         turtle.turn(TURN_NONE);
     }
-
-    Serial.println("Status change");
 }
+
+void unstuck() {
+    Serial.println("Unstuck!");
+    turtle.turn(TURN_NONE);
+    Timer1.attachInterrupt(onEachSecond);
+}
+
+void onTurtleIsStuck(Turtle &turtle) {
+    Serial.println("Stuck!");
+    turtle.turn(TURN_LEFT);
+    Timer1.attachInterrupt(unstuck);
+}
+
 
 void setup() {
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
@@ -92,9 +108,9 @@ void setup() {
     irDx.onStateChange(onObstacleSensorStateChange);
 
     Timer1.initialize();
-    Timer1.attachInterrupt(onEachSecond);
 
     turtle.setSpeed(0);
+    turtle.whenStuck(onTurtleIsStuck);
 
     activeLed.blink(100, 3);
     speedLed.blink(100, 3);
@@ -117,20 +133,20 @@ void loop() {
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
     if ((millis() - lastPrintTime) > 200) {
-        Serial.print("enabled: ");
-        Serial.print(turtle.isEnabled());
-        Serial.print(", turning: ");
-        Serial.print(turtle.isTurning());
-        Serial.print(", pulses sx: ");
-        Serial.print(turtle.motorSx.getPulses());
-        Serial.print(", dx: ");
-        Serial.print(turtle.motorDx.getPulses());
-        Serial.print(", speed sx: ");
-        Serial.print(turtle.motorSx.getCorrectedSpeed());
-        Serial.print(", dx: ");
-        Serial.print(turtle.motorDx.getCorrectedSpeed());
+        //Serial.print("enabled: ");
+        //Serial.print(turtle.isEnabled());
+        //Serial.print(", turning: ");
+        //Serial.print(turtle.isTurning());
+        //Serial.print(", pulses sx: ");
+        //Serial.print(turtle.motorSx.getPulses());
+        //Serial.print(", dx: ");
+        //Serial.print(turtle.motorDx.getPulses());
+        //Serial.print(", speed sx: ");
+        //Serial.print(turtle.motorSx.getCorrectedSpeed());
+        //Serial.print(", dx: ");
+        //Serial.print(turtle.motorDx.getCorrectedSpeed());
 
-        Serial.println("");
+        //Serial.println("");
         
         // Serial.print("Target speed: ");
         // Serial.print(turtle.getSpeed());

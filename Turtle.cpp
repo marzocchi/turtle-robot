@@ -8,9 +8,14 @@ int Turtle::flip() {
 }
 
 Turtle &Turtle::setDirection(int direction) {
+    _direction = direction;
     motorSx.setDirection(direction);
     motorDx.setDirection(direction);
     return *this;
+}
+
+int Turtle::getDirection() {
+    return _direction;
 }
 
 Turtle &Turtle::setSpeed(int targetSpeed) {
@@ -28,7 +33,23 @@ void Turtle::periodic() {
     int pulsesSx = motorSx.getPulses();
     int pulsesDx = motorDx.getPulses();
 
-    // no corrections if not enabled nor while turning
+    // if enabled and we find to be still, we assume to be stuck and trigger the
+    // callback.
+    if ( isEnabled() ) {
+        _stuck = pulsesSx == _lastPulsesSx && pulsesDx == _lastPulsesDx;
+        Serial.print("Stuck? ");
+        Serial.print(pulsesSx);
+        Serial.print(", ");
+        Serial.print(pulsesDx);
+        Serial.print(", ");
+        Serial.println(_stuck);
+        if (_stuck && _stuckCallback) {
+            _stuckCallback(*this);
+        }
+    }
+
+    // no corrections if not enabled nor while turning (we repeat checks, 
+    // because the callback before might have changed the turtle state).
     if (isTurning() || !isEnabled()) {
         motorSx.setSpeedCorrection(1);
         motorDx.setSpeedCorrection(1);
@@ -56,9 +77,12 @@ void Turtle::periodic() {
     _lastPulsesDx = pulsesDx;
 }
 
+bool Turtle::isStuck() {
+    return _stuck;
+}
+
 Turtle &Turtle::enable() {
     _enabled = true;
-    Serial.println("enabling motors");
     motorDx.enable();
     motorSx.enable();
     return *this;
@@ -115,4 +139,9 @@ int Turtle::_getTurningSpeed() {
        turningSpeed = 50;
    }
    return turningSpeed;
+}
+
+Turtle &Turtle::whenStuck(turtleIsStuckCallback callback) {
+    _stuckCallback = callback;
+    return *this;
 }
