@@ -84,6 +84,10 @@ Turtle &Turtle::toggle() {
     return *this;
 }
 
+bool Turtle::isTurning() {
+    return _turning;
+}
+
 Turtle &Turtle::turn(int direction) {
     switch (direction) {
         case TURN_NONE:

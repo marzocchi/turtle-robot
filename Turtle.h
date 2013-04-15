@@ -64,6 +64,7 @@ class Turtle {
         Turtle &disable();
 
         Turtle &turn(int direction);
+        bool isTurning();
 
     private:
         int _direction;

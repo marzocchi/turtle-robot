@@ -116,14 +116,22 @@ void loop() {
 
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
-    return;
+    if ((millis() - lastPrintTime) > 200) {
+        Serial.print("enabled: ");
+        Serial.print(turtle.isEnabled());
+        Serial.print(", turning: ");
+        Serial.print(turtle.isTurning());
+        Serial.print(", pulses sx: ");
+        Serial.print(turtle.motorSx.getPulses());
+        Serial.print(", dx: ");
+        Serial.print(turtle.motorDx.getPulses());
+        Serial.print(", speed sx: ");
+        Serial.print(turtle.motorSx.getCorrectedSpeed());
+        Serial.print(", dx: ");
+        Serial.print(turtle.motorDx.getCorrectedSpeed());
 
-    if ((millis() - lastPrintTime) > 100) {
-        Serial.print("ir: ");
-        Serial.print(irSx.getState());
-        Serial.print(", ");
-        Serial.println(irDx.getState());
-
+        Serial.println("");
+        
         // Serial.print("Target speed: ");
         // Serial.print(turtle.getSpeed());
         // Serial.print(", speed sx: ");
