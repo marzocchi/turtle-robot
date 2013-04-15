@@ -24,18 +24,18 @@ int Turtle::getSpeed() {
     return _targetSpeed;
 }
 
-void Turtle::applySpeedCorrections() {
-    // no corrections while turning
-    if (_turning) {
+void Turtle::periodic() {
+    int pulsesSx = motorSx.getPulses();
+    int pulsesDx = motorDx.getPulses();
+
+    // no corrections if not enabled nor while turning
+    if (isTurning() || !isEnabled()) {
         motorSx.setSpeedCorrection(1);
         motorDx.setSpeedCorrection(1);
         return;
     }
+
     float r = 0;
-
-    int pulsesSx = motorSx.getPulses();
-    int pulsesDx = motorDx.getPulses();
-
     float sx = pulsesSx - _lastPulsesSx;
     float dx = pulsesDx - _lastPulsesDx;
 

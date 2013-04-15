@@ -47,7 +47,7 @@ void onPulseFromLeftEncoder() {
 }
 
 void onEachSecond() {
-    turtle.applySpeedCorrections();
+    turtle.periodic();
 }
 
 void onToggleButtonClick(Button &button) {

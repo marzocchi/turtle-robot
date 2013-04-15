@@ -56,7 +56,7 @@ class Turtle {
          */
         int flip();
 
-        void applySpeedCorrections();
+        void periodic();
 
         bool isEnabled();
         Turtle &toggle();
