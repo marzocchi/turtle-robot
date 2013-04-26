@@ -12,14 +12,14 @@ ARDUINO_LIB_DIR = ${ARDUINO_BASE_DIR}/libraries
 ARDUINO_USER_LIB_DIR = ./third-party
 
 # Arduino Uno:
-ARDUINO_MODEL = atmega328p
-ARDUINO_PROGRAMMER = arduino
-ARDUINO_PINS_DIR = ${ARDUINO_BASE_DIR}/hardware/arduino/variants/standard
+# ARDUINO_MODEL = atmega328p
+# ARDUINO_PROGRAMMER = arduino
+# ARDUINO_PINS_DIR = ${ARDUINO_BASE_DIR}/hardware/arduino/variants/standard
 
 # Arduino Mega 2560:
-# ARDUINO_MODEL = atmega2560
-# ARDUINO_PROGRAMMER = wiring
-# ARDUINO_PINS_DIR = ${ARDUINO_BASE_DIR}/hardware/arduino/variants/mega
+ARDUINO_MODEL = atmega2560
+ARDUINO_PROGRAMMER = wiring
+ARDUINO_PINS_DIR = ${ARDUINO_BASE_DIR}/hardware/arduino/variants/mega
 
 INCLUDE = -c -g \
 -I${ARDUINO_CORE_DIR} \

@@ -16,7 +16,7 @@
  */
 class Motor {
     public:
-        Motor(int enablePin, int directionPin, int forwardDirection = HIGH, float ppr = 20.0, float wheelDiameter = 0.065, int minSpeed = 50):  
+        Motor(int enablePin, int directionPin, int forwardDirection = HIGH, float ppr = 20.0, float wheelDiameter = 0.065, int minSpeed = 10):  
             _enablePin(enablePin),
             _directionPin(directionPin),
             _direction(forwardDirection),
