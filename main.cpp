@@ -16,8 +16,8 @@
 #define MOTOR_DX_DIRECTION_PIN 4
 #define MOTOR_SX_ENABLE_PIN 6
 #define MOTOR_SX_DIRECTION_PIN 7
-#define IR_DX_PIN 8
-#define IR_SX_PIN 12
+#define IR_DX_PIN 12
+#define IR_SX_PIN 8
 #define SPEED_LED_PIN 9
 #define ACTIVE_LED_PIN 13
 #define SWITCH_PIN 10
@@ -70,9 +70,10 @@ void onToggleButtonClick(Button &button) {
 void onObstacleSensorStateChange(ObstacleSensor &sensor) {
     obstructed = irSx.getState() == LOW || irDx.getState() == LOW;
     activeLed.setValue(obstructed ? HIGH : LOW);
+    int turnDirection = sensor == irSx ? TURN_RIGHT : TURN_LEFT;
 
     if (obstructed) {
-        turtle.turn(TURN_RIGHT);
+        turtle.turn(turnDirection);
     } else {
         turtle.turn(TURN_NONE);
     }
