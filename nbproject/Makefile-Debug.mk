@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/ObstacleSensor.o \
+	${OBJECTDIR}/RangeFinder.o \
 	${OBJECTDIR}/Turtle.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/third-party/Button/Button.o \
@@ -78,6 +79,11 @@ ${OBJECTDIR}/ObstacleSensor.o: ObstacleSensor.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/ObstacleSensor.o ObstacleSensor.cpp
+
+${OBJECTDIR}/RangeFinder.o: RangeFinder.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/RangeFinder.o RangeFinder.cpp
 
 ${OBJECTDIR}/Turtle.o: Turtle.cpp 
 	${MKDIR} -p ${OBJECTDIR}

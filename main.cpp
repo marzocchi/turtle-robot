@@ -5,6 +5,7 @@
 #include <LED.h>
 #include "Potentiometer.h"
 #include "ObstacleSensor.h"
+#include "RangeFinder.h"
 #include "Turtle.h"
 
 // A0 is pin 14 on the UNO, and pin 54 on the mega.
@@ -22,6 +23,9 @@
 #define ACTIVE_LED_PIN 13
 #define SWITCH_PIN 10
 
+#define ULTRASOUND_TRIGGER 23
+#define ULTRASOUND_ECHO 22
+
 #define SPEED_POT_PIN 64
 #define ENCODER_SX_PIN 65
 #define ENCODER_DX_PIN 66
@@ -34,6 +38,7 @@ Button toggleSwitch(SWITCH_PIN, BUTTON_PULLDOWN);
 LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
+RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
 
 int lastPrintTime;
 bool obstructed;
@@ -91,6 +96,19 @@ void onTurtleIsStuck(Turtle &turtle) {
     Timer1.attachInterrupt(unstuck);
 }
 
+void onRangeFinderAlertStateChange(RangeFinder &rangeFinder) {
+    activeLed.setValue( rangeFinder.isAlerted() ? HIGH : LOW );
+
+    if (turtle.isEnabled()) {
+        turtle.turn(rangeFinder.isAlerted() ? TURN_LEFT : TURN_NONE);
+    }
+
+    Serial.print("Alert: ");
+    Serial.print(rangeFinder.isAlerted());
+    Serial.print(", range: ");
+    Serial.println(rangeFinder.getRange());
+}
+
 
 void setup() {
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
@@ -110,6 +128,8 @@ void setup() {
     irSx.onStateChange(onObstacleSensorStateChange);
     irDx.onStateChange(onObstacleSensorStateChange);
 
+    rangeFinder.onAlert(15, onRangeFinderAlertStateChange);
+
     Timer1.initialize();
 
     turtle.setSpeed(0);
@@ -124,7 +144,6 @@ void setup() {
     Serial.println("Hi.");
 }
 
-
 void loop() {
     // Update the state of the trigger button and the IR sensors
     toggleSwitch.isPressed();
@@ -132,10 +151,17 @@ void loop() {
     irDx.stateChanged();
 
     turtle.setSpeed(speedPot.getSector());
-
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
-    if ((millis() - lastPrintTime) > 500) {
+    float cm = rangeFinder.ping();
+
+    int timeDiff = millis() - lastPrintTime;
+    if (timeDiff > 500) {
+        Serial.print("diff: ");
+        Serial.print(timeDiff);
+        Serial.print(", range: ");
+        Serial.print(cm);
+        Serial.print(", ");
         Serial.print("enabled: ");
         Serial.print(turtle.isEnabled());
         Serial.print(", turning: ");
