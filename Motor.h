@@ -16,9 +16,10 @@
  */
 class Motor {
     public:
-        Motor(int enablePin, int directionPin, int forwardDirection = HIGH, float ppr = 20.0, float wheelDiameter = 0.065, int minSpeed = 10):  
+        Motor(int enablePin, int inputPin1, int inputPin2, int forwardDirection = HIGH, float ppr = 20.0, float wheelDiameter = 0.065, int minSpeed = 10):  
             _enablePin(enablePin),
-            _directionPin(directionPin),
+            _inputPin1(inputPin1),
+            _inputPin2(inputPin2),
             _direction(forwardDirection),
             _ppr(ppr),
             _wheelDiameter(wheelDiameter),
@@ -29,7 +30,8 @@ class Motor {
             _pulses(0)
         {
             pinMode(_enablePin, OUTPUT);
-            pinMode(_directionPin, OUTPUT);
+            pinMode(_inputPin1, OUTPUT);
+            pinMode(_inputPin2, OUTPUT);
         }
 
         Motor &setSpeed(int targetSpeed);
@@ -55,7 +57,8 @@ class Motor {
 
     private:
         int _enablePin;
-        int _directionPin;
+        int _inputPin1;
+        int _inputPin2;
         int _direction;
         float _ppr;
         float _wheelDiameter;

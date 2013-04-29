@@ -35,7 +35,7 @@ void Turtle::periodic() {
 
     // if enabled and we find to be still, we assume to be stuck and trigger the
     // callback.
-    if ( isEnabled() ) {
+    if ( false && isEnabled() ) {
         _stuck = pulsesSx == _lastPulsesSx && pulsesDx == _lastPulsesDx;
         Serial.print("Stuck? ");
         Serial.print(pulsesSx);

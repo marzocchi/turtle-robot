@@ -53,7 +53,14 @@ Motor &Motor::setDirection(int direction) {
 }
 
 void Motor::_writeToPins() {
-    digitalWrite(_directionPin, _direction);
+
+    if (_direction == HIGH) {
+        digitalWrite(_inputPin1, HIGH);
+        digitalWrite(_inputPin2, LOW);
+    } else {
+        digitalWrite(_inputPin1, LOW);
+        digitalWrite(_inputPin2, HIGH);
+    }
     if (_enabled) {
         // Serial.print("speed: ");
         // Serial.print(_targetSpeed);

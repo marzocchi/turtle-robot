@@ -13,13 +13,15 @@ typedef void (*turtleIsStuckCallback)(Turtle&);
 class Turtle {
     public:
         Turtle(int motorSxEnablePin,
-                int motorSxDirectionPin,
+                int motorSxInputPin1,
+                int motorSxInputPin2,
                 int motorDxEnablePin,
-                int motorDxDirectionPin,
+                int motorDxInputPin1,
+                int motorDxInputPin2,
                 int forwardDirection = HIGH):
 
-            motorSx(motorSxEnablePin, motorSxDirectionPin),
-            motorDx(motorDxEnablePin, motorDxDirectionPin),
+            motorSx(motorSxEnablePin, motorSxInputPin1, motorSxInputPin2),
+            motorDx(motorDxEnablePin, motorDxInputPin1, motorDxInputPin2),
 
             _lastPulsesSx(0),
             _lastPulsesDx(0),
