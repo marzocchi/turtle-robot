@@ -52,8 +52,13 @@ RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
 
 int lastPrintTime;
 int speedPotValue;
-bool obstructed;
 
+unsigned char obstruction;
+enum Obstructions {
+    ObSx = 0x01,
+    ObDx = 0x02,
+    ObFront = 0x04
+};
 
 void onPulseFromRightEncoder() {
     turtle.motorDx.pulse();
@@ -68,7 +73,6 @@ void onEachSecond() {
 }
 
 void onToggleButtonClick(Button &button) {
-    Serial.println("click");
     turtle.toggle();
 
     if (turtle.isEnabled()) {
@@ -78,39 +82,69 @@ void onToggleButtonClick(Button &button) {
     }
 }
 
-void onObstacleSensorStateChange(ObstacleSensor &sensor) {
-    obstructed = irSx.getState() == LOW || irDx.getState() == LOW;
-    activeLed.setValue(obstructed ? HIGH : LOW);
-    int turnDirection = sensor == irSx ? TURN_RIGHT : TURN_LEFT;
+void onObstacleDetected() {
+    obstruction = 0;
 
-    if (obstructed) {
-        turtle.turn(turnDirection);
-    } else {
-        turtle.turn(TURN_NONE);
+    if (irSx.getState() == LOW) {
+        obstruction |= ObSx;
+    } 
+
+    if (irDx.getState() == LOW) {
+        obstruction |= ObDx;
+    }
+
+    if (rangeFinder.isAlerted()) {
+        obstruction |= ObFront;
     }
 }
 
-int getPreferredTurnDirection() {
-    int dir = TURN_LEFT;
-    if (irDx.getState() == LOW) {
-        dir = TURN_LEFT;
-    } else if (irSx.getState() == LOW) {
-        dir = TURN_RIGHT;
-    }
-    return dir;
+void onIRSensorStateChange(IRSensor &sensor) {
+    onObstacleDetected();
 }
 
 void onRangeFinderAlertStateChange(RangeFinder &rangeFinder) {
-    activeLed.setValue( rangeFinder.isAlerted() ? HIGH : LOW );
+    onObstacleDetected();
+}
 
-    if (turtle.isEnabled()) {
-        turtle.turn(rangeFinder.isAlerted() ? getPreferredTurnDirection() : TURN_NONE);
+void handleObstacle() {
+    if (obstruction == 0) {
+        turtle.turn(TURN_NONE);
+        return;
     }
 
-    Serial.print("Alert: ");
-    Serial.print(rangeFinder.isAlerted());
-    Serial.print(", range: ");
-    Serial.println(rangeFinder.getRange());
+    if (obstruction == ObDx) {
+
+        // Turn left because there is obstacle on the right
+        turtle.turn(TURN_LEFT);
+
+    } else if ( (obstruction & ObFront) && (obstruction & ObDx) ) {
+
+        // Turn left because there is obstacle both on the right and front
+        turtle.turn(TURN_LEFT);
+
+    } else if (obstruction == ObSx) {
+
+        // Turn right because there is obstacle on the left
+        turtle.turn(TURN_RIGHT);
+
+    } else if ( (obstruction & ObFront) && (obstruction & ObSx) ) {
+
+        // Turn right because there is obstacle both on the left and front
+        turtle.turn(TURN_RIGHT);
+
+    } else if (obstruction & ObFront) {
+
+        // there is an obstacle up ahead, backtrack until we are clear or
+        // for a second, then perform a small turn
+
+        turtle.flip();
+        delay(1000);
+        turtle.flip();
+
+        turtle.turn(TURN_RIGHT);
+        delay(600);
+        turtle.turn(TURN_NONE);
+    }
 }
 
 void setup() {
@@ -131,7 +165,7 @@ void setup() {
     irSx.onStateChange(onIRSensorStateChange);
     irDx.onStateChange(onIRSensorStateChange);
 
-    rangeFinder.onAlert(15, onRangeFinderAlertStateChange);
+    rangeFinder.onAlert(10, onRangeFinderAlertStateChange);
 
     Timer1.initialize();
 
@@ -157,6 +191,10 @@ void loop() {
     turtle.setSpeed(speedPotValue);
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
+
+    // Handle obstacles
+    activeLed.setValue(obstruction);
+    handleObstacle();
 
     int timeDiff = millis() - lastPrintTime;
     if (timeDiff > 500) {
