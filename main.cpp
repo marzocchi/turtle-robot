@@ -48,7 +48,7 @@ Button toggleSwitch(SWITCH_PIN, BUTTON_PULLUP_INTERNAL);
 LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
-// RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
+RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
 
 int lastPrintTime;
 int speedPotValue;
@@ -102,12 +102,21 @@ void onTurtleIsStuck(Turtle &turtle) {
     Timer1.attachInterrupt(unstuck);
 }
 
+int getPreferredTurnDirection() {
+    int dir = TURN_LEFT;
+    if (irDx.getState() == LOW) {
+        dir = TURN_LEFT;
+    } else if (irSx.getState() == LOW) {
+        dir = TURN_RIGHT;
+    }
+    return dir;
+}
+
 void onRangeFinderAlertStateChange(RangeFinder &rangeFinder) {
-    return;
     activeLed.setValue( rangeFinder.isAlerted() ? HIGH : LOW );
 
     if (turtle.isEnabled()) {
-        turtle.turn(rangeFinder.isAlerted() ? TURN_LEFT : TURN_NONE);
+        turtle.turn(rangeFinder.isAlerted() ? getPreferredTurnDirection() : TURN_NONE);
     }
 
     Serial.print("Alert: ");
@@ -115,7 +124,6 @@ void onRangeFinderAlertStateChange(RangeFinder &rangeFinder) {
     Serial.print(", range: ");
     Serial.println(rangeFinder.getRange());
 }
-
 
 void setup() {
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
@@ -135,7 +143,7 @@ void setup() {
     irSx.onStateChange(onObstacleSensorStateChange);
     irDx.onStateChange(onObstacleSensorStateChange);
 
-    // rangeFinder.onAlert(15, onRangeFinderAlertStateChange);
+    rangeFinder.onAlert(15, onRangeFinderAlertStateChange);
 
     Timer1.initialize();
 
@@ -147,7 +155,6 @@ void setup() {
 
     Serial.begin(9600);
     Serial.println("Hi.");
-    turtle.enable();
 }
 
 void loop() {
@@ -155,6 +162,7 @@ void loop() {
     toggleSwitch.isPressed();
     irSx.stateChanged();
     irDx.stateChanged();
+    rangeFinder.ping();
 
     speedPotValue = map(speedPot.getValue(), 0, 1023, 0, 255);
 
