@@ -145,19 +145,18 @@ void setup() {
 }
 
 void loop() {
-    // Update the state of the trigger button and the IR sensors
+    // Update the state of the trigger button and sensors
     toggleSwitch.isPressed();
     irSx.stateChanged();
     irDx.stateChanged();
     rangeFinder.ping();
 
-    speedPotValue = map(speedPot.getValue(), 0, 1023, 0, 255);
+    // make speed vary by increments of 5, to avoid insignificant changes
+    // to the turtle and motor state when the pot floats
+    speedPotValue = map(speedPot.getValue(), 0, 1023, 0, 52) * 5;
+    turtle.setSpeed(speedPotValue);
+    analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
-    // write speed only if it differs more than 5 from current speed
-    if (abs(speedPotValue - turtle.getSpeed()) > 5) {
-        turtle.setSpeed(speedPotValue);
-        analogWrite(SPEED_LED_PIN, turtle.getSpeed());
-    }
 
     int timeDiff = millis() - lastPrintTime;
     if (timeDiff > 500) {
