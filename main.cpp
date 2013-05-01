@@ -44,7 +44,7 @@ Turtle turtle(MOTOR_SX_ENABLE_PIN,
 
 ObstacleSensor irSx(IR_SX_PIN, HIGH);
 ObstacleSensor irDx(IR_DX_PIN, HIGH);
-Button toggleSwitch(SWITCH_PIN, BUTTON_PULLDOWN);
+Button toggleSwitch(SWITCH_PIN, BUTTON_PULLUP_INTERNAL);
 LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
@@ -53,8 +53,6 @@ Potentiometer speedPot(SPEED_POT_PIN);
 int lastPrintTime;
 int speedPotValue;
 bool obstructed;
-// we always get a stray click right after setup, so we ignore it.
-bool ignoredFirstToggleClick = false;
 
 
 void onPulseFromRightEncoder() {
@@ -71,10 +69,6 @@ void onEachSecond() {
 
 void onToggleButtonClick(Button &button) {
     Serial.println("click");
-    if (!ignoredFirstToggleClick) {
-        ignoredFirstToggleClick = true;
-        return;
-    }
     turtle.toggle();
 
     if (turtle.isEnabled()) {
