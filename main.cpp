@@ -22,9 +22,9 @@
 
 #define IR_DX_PIN 12
 #define IR_SX_PIN 8
-#define SPEED_LED_PIN 45
+#define SPEED_LED_PIN 6
 #define ACTIVE_LED_PIN 13
-#define SWITCH_PIN 22
+#define SWITCH_PIN 48
 
 #define ULTRASOUND_TRIGGER 23
 #define ULTRASOUND_ECHO 22
