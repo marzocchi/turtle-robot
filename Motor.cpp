@@ -33,8 +33,10 @@ Motor &Motor::setSpeed(int targetSpeed) {
     if (targetSpeed < _minSpeed) {
         targetSpeed = 0;
     }
-    _targetSpeed = targetSpeed;
-    _writeToPins();
+    if (targetSpeed != _targetSpeed) {
+        _targetSpeed = targetSpeed;
+        _writeToPins();
+    }
     return *this;
 }
 
