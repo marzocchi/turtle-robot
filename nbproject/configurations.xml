@@ -15,10 +15,6 @@
       <logicalFolder name="f1" displayName="libraries" projectFiles="true">
         <itemPath>Motor.cpp</itemPath>
         <itemPath>Motor.h</itemPath>
-        <itemPath>ObstacleSensor.cpp</itemPath>
-        <itemPath>ObstacleSensor.h</itemPath>
-        <itemPath>RangeFinder.cpp</itemPath>
-        <itemPath>RangeFinder.h</itemPath>
       </logicalFolder>
       <itemPath>/Users/marzocchi/Documents/Arduino/Turtle/Makefile</itemPath>
       <itemPath>Turtle.cpp</itemPath>
@@ -114,13 +110,13 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ObstacleSensor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ObstacleSensor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -130,6 +126,13 @@
       </item>
       <item path="Turtle.h" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="SourceFiles">
+        <ccTool>
+          <incDir>
+            <pElem>../libraries/PID_v1</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="third-party/Button/AlphaLicense.txt"
@@ -216,13 +219,13 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ObstacleSensor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ObstacleSensor.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
       </item>

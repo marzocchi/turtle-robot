@@ -1,15 +1,15 @@
-#include "ObstacleSensor.h"
+#include "IRSensor.h"
 
-int ObstacleSensor::getState() {
+int IRSensor::getState() {
   return _state;
 }
 
-ObstacleSensor &ObstacleSensor::onStateChange(obstacleSensorStateChangeCallback callback) {
+IRSensor &IRSensor::onStateChange(irSensorCallback callback) {
     _callback = callback;
     return *this;
 }
 
-bool ObstacleSensor::stateChanged() {
+bool IRSensor::stateChanged() {
   int reading = digitalRead(_pin);
   bool changed = false;
 
@@ -32,6 +32,6 @@ bool ObstacleSensor::stateChanged() {
   return changed;
 }
 
-bool ObstacleSensor::operator==(ObstacleSensor &sensor) {
+bool IRSensor::operator==(IRSensor &sensor) {
   return this == &sensor;
 }

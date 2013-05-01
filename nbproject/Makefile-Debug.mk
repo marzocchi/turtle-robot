@@ -35,8 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/IRSensor.o \
 	${OBJECTDIR}/Motor.o \
-	${OBJECTDIR}/ObstacleSensor.o \
 	${OBJECTDIR}/RangeFinder.o \
 	${OBJECTDIR}/Turtle.o \
 	${OBJECTDIR}/main.o \
@@ -70,30 +70,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	avr-gcc -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle ${OBJECTFILES} ${LDLIBSOPTIONS} ${FLAGS_LINKER}
 
+${OBJECTDIR}/IRSensor.o: IRSensor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/IRSensor.o IRSensor.cpp
+
 ${OBJECTDIR}/Motor.o: Motor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Motor.o Motor.cpp
-
-${OBJECTDIR}/ObstacleSensor.o: ObstacleSensor.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/ObstacleSensor.o ObstacleSensor.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Motor.o Motor.cpp
 
 ${OBJECTDIR}/RangeFinder.o: RangeFinder.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/RangeFinder.o RangeFinder.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/RangeFinder.o RangeFinder.cpp
 
 ${OBJECTDIR}/Turtle.o: Turtle.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Turtle.o Turtle.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Turtle.o Turtle.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/third-party/Button/Button.o: third-party/Button/Button.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/Button

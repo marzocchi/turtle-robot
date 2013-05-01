@@ -4,7 +4,7 @@
 #include <Button.h>
 #include <LED.h>
 #include "Potentiometer.h"
-#include "ObstacleSensor.h"
+#include "IRSensor.h"
 #include "RangeFinder.h"
 #include "Turtle.h"
 
@@ -42,8 +42,8 @@ Turtle turtle(MOTOR_SX_ENABLE_PIN,
         MOTOR_DX_INPUT_PIN2,
         HIGH);
 
-ObstacleSensor irSx(IR_SX_PIN, HIGH);
-ObstacleSensor irDx(IR_DX_PIN, HIGH);
+IRSensor irSx(IR_SX_PIN, HIGH);
+IRSensor irDx(IR_DX_PIN, HIGH);
 Button toggleSwitch(SWITCH_PIN, BUTTON_PULLUP_INTERNAL);
 LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
@@ -128,8 +128,8 @@ void setup() {
     pinMode(IR_DX_PIN, INPUT);
 
     toggleSwitch.clickHandler(onToggleButtonClick);
-    irSx.onStateChange(onObstacleSensorStateChange);
-    irDx.onStateChange(onObstacleSensorStateChange);
+    irSx.onStateChange(onIRSensorStateChange);
+    irDx.onStateChange(onIRSensorStateChange);
 
     rangeFinder.onAlert(15, onRangeFinderAlertStateChange);
 
