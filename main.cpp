@@ -174,19 +174,6 @@ void loop() {
         Serial.print(turtle.motorDx.getCorrectedSpeed());
 
         Serial.println("");
-        
-        // Serial.print("Target speed: ");
-        // Serial.print(turtle.getSpeed());
-        // Serial.print(", speed sx: ");
-        // Serial.print(turtle.motorSx.getCorrectedSpeed());
-        // Serial.print(", dx: ");
-        // Serial.println(turtle.motorDx.getCorrectedSpeed());
-
-        //Serial.print(", obstructed sx: ");
-        //Serial.print(obstructedSx);
-        //Serial.print(", dx: ");
-        //Serial.println(obstructedDx);
-
         lastPrintTime = millis();
     }
 
