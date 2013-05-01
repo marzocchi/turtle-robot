@@ -90,18 +90,6 @@ void onObstacleSensorStateChange(ObstacleSensor &sensor) {
     }
 }
 
-void unstuck() {
-    Serial.println("Unstuck!");
-    turtle.turn(TURN_NONE);
-    Timer1.attachInterrupt(onEachSecond);
-}
-
-void onTurtleIsStuck(Turtle &turtle) {
-    Serial.println("Stuck!");
-    turtle.turn(TURN_LEFT);
-    Timer1.attachInterrupt(unstuck);
-}
-
 int getPreferredTurnDirection() {
     int dir = TURN_LEFT;
     if (irDx.getState() == LOW) {
@@ -148,7 +136,6 @@ void setup() {
     Timer1.initialize();
 
     turtle.setSpeed(0);
-    turtle.whenStuck(onTurtleIsStuck);
 
     activeLed.blink(100, 3);
     speedLed.blink(100, 3);

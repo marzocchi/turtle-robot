@@ -7,9 +7,6 @@ const int TURN_LEFT = -1;
 const int TURN_RIGHT = 1;
 const int TURN_NONE = 0;
 
-class Turtle;
-typedef void (*turtleIsStuckCallback)(Turtle&);
-
 class Turtle {
     public:
         Turtle(int motorSxEnablePin,
@@ -28,8 +25,6 @@ class Turtle {
             _enabled(false),
             _turning(false)
         {
-                _stuck = false;
-                _lastStuckCheckTime = millis();
                 setDirection(forwardDirection);
         };
         Motor motorSx;
@@ -74,8 +69,6 @@ class Turtle {
         Turtle &turn(int direction);
         bool isTurning();
 
-        Turtle &whenStuck(turtleIsStuckCallback);
-        bool isStuck();
 
     private:
         int _direction;
@@ -84,13 +77,9 @@ class Turtle {
 
         int _lastPulsesSx;
         int _lastPulsesDx;
-        int _lastStuckCheckTime;
 
         bool _enabled;
         bool _turning;
-        bool _stuck;
-
-        turtleIsStuckCallback _stuckCallback;
 
         int _getTurningSpeed();
 };
