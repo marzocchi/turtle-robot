@@ -14,11 +14,11 @@
 // 19 (interrupt 4), 20 (interrupt 3), and 21 (interrupt 2). 
 
 #define MOTOR_DX_ENABLE_PIN 9
-#define MOTOR_DX_INPUT_PIN1 30
-#define MOTOR_DX_INPUT_PIN2 31
+#define MOTOR_DX_INPUT_PIN1 31
+#define MOTOR_DX_INPUT_PIN2 30
 #define MOTOR_SX_ENABLE_PIN 10
-#define MOTOR_SX_INPUT_PIN1 33
-#define MOTOR_SX_INPUT_PIN2 32
+#define MOTOR_SX_INPUT_PIN1 32
+#define MOTOR_SX_INPUT_PIN2 33
 
 #define IR_DX_PIN 12
 #define IR_SX_PIN 8
