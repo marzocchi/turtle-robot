@@ -117,7 +117,7 @@ void handleObstacle() {
         // Turn left because there is obstacle on the right
         turtle.turn(TURN_LEFT);
 
-    } else if ( (obstruction & ObFront) && (obstruction & ObDx) ) {
+    } else if ( (obstruction & ObDx) && (obstruction & ObFront) ) {
 
         // Turn left because there is obstacle both on the right and front
         turtle.turn(TURN_LEFT);
@@ -127,12 +127,12 @@ void handleObstacle() {
         // Turn right because there is obstacle on the left
         turtle.turn(TURN_RIGHT);
 
-    } else if ( (obstruction & ObFront) && (obstruction & ObSx) ) {
+    } else if ( (obstruction & ObSx) && (obstruction & ObFront) ) {
 
         // Turn right because there is obstacle both on the left and front
         turtle.turn(TURN_RIGHT);
 
-    } else if (obstruction & ObFront) {
+    } else if ( (obstruction & ObFront) || ( (obstruction & ObSx) && (obstruction & ObDx) ) ) {
 
         // there is an obstacle up ahead, backtrack until we are clear or
         // for a second, then perform a small turn
