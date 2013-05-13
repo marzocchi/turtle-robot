@@ -70,16 +70,6 @@ void onEachSecond() {
     turtle.periodic();
 }
 
-void onToggleButtonClick(Button &button) {
-    turtle.toggle();
-
-    if (turtle.isEnabled()) {
-        Timer1.attachInterrupt(onEachSecond);
-    } else {
-        Timer1.detachInterrupt();
-    }
-}
-
 void onObstacleDetected() {
     obstruction = 0;
 
