@@ -24,7 +24,6 @@
 #define IR_SX_PIN 8
 #define SPEED_LED_PIN 6
 #define ACTIVE_LED_PIN 13
-#define SWITCH_PIN 48
 
 #define ULTRASOUND_TRIGGER 23
 #define ULTRASOUND_ECHO 67
@@ -44,7 +43,6 @@ Turtle turtle(MOTOR_SX_ENABLE_PIN,
 
 IRSensor irSx(IR_SX_PIN, HIGH);
 IRSensor irDx(IR_DX_PIN, HIGH);
-Button toggleSwitch(SWITCH_PIN, BUTTON_PULLUP_INTERNAL);
 LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
@@ -161,7 +159,6 @@ void setup() {
     pinMode(IR_SX_PIN, INPUT);
     pinMode(IR_DX_PIN, INPUT);
 
-    toggleSwitch.clickHandler(onToggleButtonClick);
     irSx.onStateChange(onIRSensorStateChange);
     irDx.onStateChange(onIRSensorStateChange);
 
@@ -176,11 +173,11 @@ void setup() {
 
     Serial.begin(9600);
     Serial.println("Hi.");
+    turtle.enable();
 }
 
 void loop() {
-    // Update the state of the trigger button and sensors
-    toggleSwitch.isPressed();
+    // Update the state of sensors
     irSx.stateChanged();
     irDx.stateChanged();
     rangeFinder.ping();
