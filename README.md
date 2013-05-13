@@ -1,3 +1,3 @@
 ![sketch][sketch]
 
-[sketch]: sketch.png
+[sketch]: http://note.io/13tJkD1
