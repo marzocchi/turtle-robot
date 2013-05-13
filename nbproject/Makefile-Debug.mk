@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Turtle.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/third-party/Button/Button.o \
+	${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o \
 	${OBJECTDIR}/third-party/LED/LED.o \
 	${OBJECTDIR}/third-party/Potentiometer/Potentiometer.o \
 	${OBJECTDIR}/third-party/TimerOne/TimerOne.o
@@ -73,47 +74,52 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle: ${OBJECTFILES}
 ${OBJECTDIR}/IRSensor.o: IRSensor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/IRSensor.o IRSensor.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/IRSensor.o IRSensor.cpp
 
 ${OBJECTDIR}/Motor.o: Motor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Motor.o Motor.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Motor.o Motor.cpp
 
 ${OBJECTDIR}/RangeFinder.o: RangeFinder.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/RangeFinder.o RangeFinder.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/RangeFinder.o RangeFinder.cpp
 
 ${OBJECTDIR}/Turtle.o: Turtle.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Turtle.o Turtle.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/Turtle.o Turtle.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L -I../libraries/PID_v1 ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/third-party/Button/Button.o: third-party/Button/Button.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/Button
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/Button/Button.o third-party/Button/Button.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/Button/Button.o third-party/Button/Button.cpp
+
+${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o: third-party/HMC5883L/HMC5883L.cpp 
+	${MKDIR} -p ${OBJECTDIR}/third-party/HMC5883L
+	${RM} $@.d
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o third-party/HMC5883L/HMC5883L.cpp
 
 ${OBJECTDIR}/third-party/LED/LED.o: third-party/LED/LED.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/LED
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/LED/LED.o third-party/LED/LED.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/LED/LED.o third-party/LED/LED.cpp
 
 ${OBJECTDIR}/third-party/Potentiometer/Potentiometer.o: third-party/Potentiometer/Potentiometer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/Potentiometer
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/Potentiometer/Potentiometer.o third-party/Potentiometer/Potentiometer.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/Potentiometer/Potentiometer.o third-party/Potentiometer/Potentiometer.cpp
 
 ${OBJECTDIR}/third-party/TimerOne/TimerOne.o: third-party/TimerOne/TimerOne.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/TimerOne
 	${RM} $@.d
-	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/TimerOne/TimerOne.o third-party/TimerOne/TimerOne.cpp
+	$(COMPILE.cc) -g -I${INCLUDE} -Ithird-party/LED -Ithird-party/PinChangeInt -Ithird-party/Potentiometer -Ithird-party/TimerOne -Ithird-party/Button -Ithird-party/HMC5883L ${FLAGS_GPP} -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/TimerOne/TimerOne.o third-party/TimerOne/TimerOne.cpp
 
 # Subprojects
 .build-subprojects:

@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include <PinChangeInt.h>
 #include <TimerOne.h>
 #include <Button.h>
@@ -6,6 +7,7 @@
 #include "Potentiometer.h"
 #include "IRSensor.h"
 #include "RangeFinder.h"
+#include "HMC5883L.h"
 #include "Turtle.h"
 
 // A0 is pin 14 on the UNO, and pin 54 on the mega.
@@ -47,6 +49,8 @@ LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
 RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
+
+HMC5883L compass = HMC5883L();
 
 int lastPrintTime;
 int speedPotValue;
@@ -136,6 +140,8 @@ void handleObstacle() {
 }
 
 void setup() {
+    Wire.begin();
+
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
 
     pinMode(ENCODER_SX_PIN, INPUT);
@@ -155,13 +161,14 @@ void setup() {
     rangeFinder.onAlert(10, onRangeFinderAlertStateChange);
 
     Timer1.initialize();
-
     turtle.setSpeed(0);
 
     activeLed.blink(100, 3);
     speedLed.blink(100, 3);
 
     Serial.begin(9600);
+
+    
     Serial.println("Hi.");
     turtle.enable();
 }

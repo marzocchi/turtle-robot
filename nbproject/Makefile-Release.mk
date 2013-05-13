@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Turtle.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/third-party/Button/Button.o \
+	${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o \
 	${OBJECTDIR}/third-party/LED/LED.o \
 	${OBJECTDIR}/third-party/Potentiometer/Potentiometer.o \
 	${OBJECTDIR}/third-party/TimerOne/TimerOne.o
@@ -99,6 +100,11 @@ ${OBJECTDIR}/third-party/Button/Button.o: third-party/Button/Button.cpp
 	${MKDIR} -p ${OBJECTDIR}/third-party/Button
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/Button/Button.o third-party/Button/Button.cpp
+
+${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o: third-party/HMC5883L/HMC5883L.cpp 
+	${MKDIR} -p ${OBJECTDIR}/third-party/HMC5883L
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/third-party/HMC5883L/HMC5883L.o third-party/HMC5883L/HMC5883L.cpp
 
 ${OBJECTDIR}/third-party/LED/LED.o: third-party/LED/LED.cpp 
 	${MKDIR} -p ${OBJECTDIR}/third-party/LED
