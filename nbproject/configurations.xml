@@ -17,6 +17,7 @@
         <itemPath>Motor.h</itemPath>
       </logicalFolder>
       <itemPath>/Users/marzocchi/Documents/Arduino/Turtle/Makefile</itemPath>
+      <itemPath>README.md</itemPath>
       <itemPath>Turtle.cpp</itemPath>
       <itemPath>Turtle.h</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -110,17 +111,11 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="RangeFinder.h" ex="false" tool="3" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Turtle.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -219,17 +214,11 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="RangeFinder.h" ex="false" tool="3" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Turtle.cpp" ex="false" tool="1" flavor2="0">
       </item>
