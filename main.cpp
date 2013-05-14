@@ -7,8 +7,9 @@
 #include "Potentiometer.h"
 #include "IRSensor.h"
 #include "RangeFinder.h"
-#include "HMC5883L.h"
+#include "Compass.h"
 #include "Turtle.h"
+#include "Compass.h"
 
 // A0 is pin 14 on the UNO, and pin 54 on the mega.
 // Mega interrupts: 
@@ -50,7 +51,7 @@ LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
 RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
 
-HMC5883L compass = HMC5883L();
+Compass compass;
 
 int lastPrintTime;
 int speedPotValue;
@@ -140,6 +141,7 @@ void handleObstacle() {
 }
 
 void setup() {
+    Serial.begin(9600);
     Wire.begin();
 
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
@@ -166,8 +168,7 @@ void setup() {
     activeLed.blink(100, 3);
     speedLed.blink(100, 3);
 
-    Serial.begin(9600);
-
+    compass.setup();
     
     Serial.println("Hi.");
     turtle.enable();
@@ -179,12 +180,13 @@ void loop() {
     irDx.stateChanged();
     rangeFinder.ping();
 
+    float heading = compass.getHeading();
+
     // make speed vary by increments of 5, to avoid insignificant changes
     // to the turtle and motor state when the pot floats
     speedPotValue = map(speedPot.getValue(), 0, 1023, 0, 52) * 5;
     turtle.setSpeed(speedPotValue);
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
-
 
     // Handle obstacles
     activeLed.setValue(obstruction);
@@ -194,6 +196,8 @@ void loop() {
     if (timeDiff > 500) {
         Serial.print("enabled: ");
         Serial.print(turtle.isEnabled());
+        Serial.print(", heading: ");
+        Serial.print(heading);
         Serial.print(", turning: ");
         Serial.print(turtle.isTurning());
         Serial.print(", pulses sx: ");

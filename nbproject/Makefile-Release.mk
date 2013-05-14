@@ -35,6 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/_ext/1215421894/Wire.o \
+	${OBJECTDIR}/_ext/55187095/twi.o \
+	${OBJECTDIR}/Compass.o \
 	${OBJECTDIR}/IRSensor.o \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/RangeFinder.o \
@@ -70,6 +73,21 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/_ext/1215421894/Wire.o: /Applications/Arduino.app/Contents/Resources/Java/libraries/Wire/Wire.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1215421894
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1215421894/Wire.o /Applications/Arduino.app/Contents/Resources/Java/libraries/Wire/Wire.cpp
+
+${OBJECTDIR}/_ext/55187095/twi.o: /Applications/Arduino.app/Contents/Resources/Java/libraries/Wire/utility/twi.c 
+	${MKDIR} -p ${OBJECTDIR}/_ext/55187095
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/55187095/twi.o /Applications/Arduino.app/Contents/Resources/Java/libraries/Wire/utility/twi.c
+
+${OBJECTDIR}/Compass.o: Compass.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Compass.o Compass.cpp
 
 ${OBJECTDIR}/IRSensor.o: IRSensor.cpp 
 	${MKDIR} -p ${OBJECTDIR}
