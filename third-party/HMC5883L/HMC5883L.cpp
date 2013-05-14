@@ -97,11 +97,13 @@ int HMC5883L::SetScale(float gauss)
 	// Setting is in the top 3 bits of the register.
 	regValue = regValue << 5;
 	Write(ConfigurationRegisterB, regValue);
+    return 0;
 }
 
 int HMC5883L::SetMeasurementMode(uint8_t mode)
 {
 	Write(ModeRegister, mode);
+    return 0;
 }
 
 void HMC5883L::Write(int address, int data)

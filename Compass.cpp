@@ -2,9 +2,7 @@
 
 
 float Compass::getHeading() {
-    _compass.SetMeasurementMode(Measurement_SingleShot);
     MagnetometerScaled data = _compass.ReadScaledAxis();
-    _compass.SetMeasurementMode(Measurement_Idle);
   
     float radians = atan2(data.YAxis, data.XAxis);
    
@@ -19,6 +17,7 @@ float Compass::getHeading() {
 
 Compass &Compass::setup() {
     _compass = HMC5883L();
+    _compass.SetMeasurementMode(Measurement_Continuous);
     _compass.SetScale(_scale);
     return *this;
 }
