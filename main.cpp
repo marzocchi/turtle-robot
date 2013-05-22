@@ -32,6 +32,8 @@
 #define ENCODER_SX_PIN 65
 #define ENCODER_DX_PIN 66
 
+#define PR_SX_PIN 62
+#define PR_DX_PIN 63
 
 Turtle turtle(MOTOR_SX_ENABLE_PIN,
         MOTOR_SX_INPUT_PIN1,
@@ -47,6 +49,9 @@ LED speedLed(SPEED_LED_PIN);
 LED activeLed(ACTIVE_LED_PIN);
 Potentiometer speedPot(SPEED_POT_PIN);
 RangeFinder rangeFinder(ULTRASOUND_TRIGGER, ULTRASOUND_ECHO);
+
+Potentiometer photoSx(PR_SX_PIN);
+Potentiometer photoDx(PR_DX_PIN);
 
 int lastPrintTime;
 int speedPotValue;
@@ -145,7 +150,23 @@ void handleObstacle() {
     }
 }
 
+void chaseLight() {
+    int sx = photoSx.getValue();
+    int dx = photoDx.getValue();
+
+    int diff = abs(sx - dx);
+
+    if (diff < 10) {
+       turtle.turn(TURN_NONE);
+       return;
+    } 
+
+    turtle.turn( sx > dx ? TURN_LEFT : TURN_RIGHT );
+}
+
 void setup() {
+    pinMode(PR_SX_PIN, INPUT);
+    pinMode(PR_DX_PIN, INPUT);
     digitalWrite(SPEED_POT_PIN, HIGH); // pull up
 
     pinMode(ENCODER_SX_PIN, INPUT);
@@ -188,10 +209,10 @@ void loop() {
     turtle.setSpeed(speedPotValue);
     analogWrite(SPEED_LED_PIN, turtle.getSpeed());
 
-
     // Handle obstacles
     activeLed.setValue(obstruction);
     handleObstacle();
+    chaseLight();
 
     int timeDiff = millis() - lastPrintTime;
     if (timeDiff > 500) {
