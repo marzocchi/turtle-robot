@@ -13,11 +13,14 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="libraries" projectFiles="true">
+        <itemPath>IRSensor.cpp</itemPath>
+        <itemPath>IRSensor.h</itemPath>
         <itemPath>Motor.cpp</itemPath>
         <itemPath>Motor.h</itemPath>
+        <itemPath>RangeFinder.cpp</itemPath>
+        <itemPath>RangeFinder.h</itemPath>
       </logicalFolder>
       <itemPath>/Users/marzocchi/Documents/Arduino/Turtle/Makefile</itemPath>
-      <itemPath>README.md</itemPath>
       <itemPath>Turtle.cpp</itemPath>
       <itemPath>Turtle.h</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -69,7 +72,8 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>third-party</Elem>
+    <Elem>/Applications/Arduino.app/Contents/Resources/Java/libraries/Wire</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -99,6 +103,7 @@
           <commandLine>${FLAGS_GPP}</commandLine>
         </ccTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/turtle</output>
           <linkerAddLib>
             <pElem>third-party</pElem>
           </linkerAddLib>
@@ -111,11 +116,17 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="README.md" ex="false" tool="3" flavor2="0">
+      <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RangeFinder.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Turtle.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -214,11 +225,17 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="IRSensor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IRSensor.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Motor.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="README.md" ex="false" tool="3" flavor2="0">
+      <item path="RangeFinder.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RangeFinder.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Turtle.cpp" ex="false" tool="1" flavor2="0">
       </item>

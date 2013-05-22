@@ -10,7 +10,8 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>third-party</sourceRootElem>
+                <sourceRootElem>/Applications/Arduino.app/Contents/Resources/Java/libraries/Wire</sourceRootElem>
+                <sourceRootElem>.</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
